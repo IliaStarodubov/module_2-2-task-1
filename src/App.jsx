@@ -5,27 +5,25 @@ export const App = () => {
 	const [value, setValue] = useState('');
 	const [list, setList] = useState([]);
 	const [error, setError] = useState('');
-	const [isValueVaild, setIsValueVaild] = useState(false);
-	const updatedList = [...list, { id: Date.now(), value }];
+	// const [isValueVaild, setIsValueVaild] = useState(false);
+	const isValueVaild = value < 3 ? false : true;
+	// const updatedList = [...list, { id: Date.now(), value }];
 
 	const onInputButtonClick = () => {
 		const promptValue = prompt();
 		if (promptValue.length < 3) {
 			setError('Введенное значение должно содержать минимум 3 символа');
-			setIsValueVaild(false);
 		} else {
 			setValue(promptValue);
 			setError('');
-			setIsValueVaild(true);
 		}
 	};
 
 	const onAddButtonClick = () => {
 		if (value.length >= 3) {
-			setList(updatedList);
+			setList((updatedList) => [...updatedList, { id: Date.now(), value }]);
 			setValue('');
 			setError('');
-			setIsValueVaild(false);
 		}
 	};
 
